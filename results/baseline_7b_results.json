@@ -1,0 +1,218 @@
+[
+  {
+    "file": "000.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "rook",
+    "model_answer": "King"
+  },
+  {
+    "file": "001.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "rook",
+    "model_answer": "King"
+  },
+  {
+    "file": "002.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "rook",
+    "model_answer": "King"
+  },
+  {
+    "file": "003.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "pawn",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "004.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "pawn",
+    "model_answer": "King"
+  },
+  {
+    "file": "005.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "knight",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "006.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "knight",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "007.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "knight",
+    "model_answer": "King"
+  },
+  {
+    "file": "008.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "knight",
+    "model_answer": "Rook"
+  },
+  {
+    "file": "009.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "bishop",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "010.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "bishop",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "011.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "king",
+    "model_answer": "King"
+  },
+  {
+    "file": "012.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "king",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "013.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "king",
+    "model_answer": "King"
+  },
+  {
+    "file": "014.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "queen",
+    "model_answer": "King"
+  },
+  {
+    "file": "015.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "queen",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "016.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "queen",
+    "model_answer": "King"
+  },
+  {
+    "file": "017.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "pawn",
+    "model_answer": "King"
+  },
+  {
+    "file": "018.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "rook",
+    "model_answer": "King"
+  },
+  {
+    "file": "019.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "rook",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "020.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "rook",
+    "model_answer": "King"
+  },
+  {
+    "file": "021.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "rook",
+    "model_answer": "King"
+  },
+  {
+    "file": "022.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "rook",
+    "model_answer": "King"
+  },
+  {
+    "file": "023.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "knight",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "024.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "knight",
+    "model_answer": "Rook"
+  },
+  {
+    "file": "025.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "bishop",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "026.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "bishop",
+    "model_answer": "King"
+  },
+  {
+    "file": "027.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "bishop",
+    "model_answer": "King"
+  },
+  {
+    "file": "028.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "bishop",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "029.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "king",
+    "model_answer": "King"
+  },
+  {
+    "file": "030.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "king",
+    "model_answer": "King"
+  },
+  {
+    "file": "031.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "king",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "032.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "queen",
+    "model_answer": "Pawn"
+  },
+  {
+    "file": "033.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "queen",
+    "model_answer": "King"
+  },
+  {
+    "file": "034.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "queen",
+    "model_answer": "King"
+  },
+  {
+    "file": "035.jpg",
+    "question": "What chess piece is shown in this image? Answer with one word.",
+    "answer_piece": "queen",
+    "model_answer": "Pawn"
+  }
+]
