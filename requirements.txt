@@ -1,12 +1,13 @@
-# Local zero-shot inference (Apple Silicon / MPS) uses the official LLaVA repo:
-#   git clone https://github.com/haotian-liu/LLaVA.git && pip install -e LLaVA
-torch>=2.1
+# Fine-tuning / evaluation (Colab A100, CUDA) — versions used in the reported runs
+torch
 torchvision
-transformers
-accelerate
-datasets
+transformers==4.57.1
+peft==0.17.1
+accelerate==1.10.1
+bitsandbytes==0.48.1
 pillow
 pandas
-protobuf
-# CUDA only (4-bit loading on Colab):
-# bitsandbytes
+datasets
+
+# Local zero-shot inference on Apple Silicon (src/*.py) uses the official LLaVA repo instead:
+#   git clone https://github.com/haotian-liu/LLaVA.git && pip install -e LLaVA

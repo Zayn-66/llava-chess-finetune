@@ -5,7 +5,8 @@ English | [中文](README.md)
 Parameter-efficient fine-tuning of **LLaVA-v1.5 (7B / 13B)** to name the **colour and type of every clearly visible chess piece** in an image: a fine-grained VQA domain-adaptation task.
 
 > Group project (Group ReLU, 5 members) for UNSW COMP9444 *Neural Networks and Deep Learning*, 26T2.
-> This repo contains **only my own contributions**: data splitting, zero-shot baselines and the evaluation metrics. The full training code lives in the course submission and is not published here.
+> My role: data splitting, zero-shot baselines and evaluation metrics, plus taking part in the LoRA / QLoRA fine-tuning experiments.
+> `src/finetune/` is a standalone training and evaluation pipeline I wrote to match the final experimental setup; the team's submitted notebook is not published here.
 
 ## Results (held-out test, n = 30)
 
@@ -46,6 +47,27 @@ Parameter-efficient fine-tuning of **LLaVA-v1.5 (7B / 13B)** to name the **colou
 | Zero-shot baseline (local) | [`src/single_infer.py`](src/single_infer.py), [`src/run_baseline.py`](src/run_baseline.py) | LLaVA-7B in fp16 on Apple Silicon (MPS) |
 | Zero-shot baseline (cloud) | [`notebooks/baseline_llava13b_colab.ipynb`](notebooks/baseline_llava13b_colab.ipynb) | 13B in 4-bit (about 9 GB on a T4); auto-locates the shared Drive folder for teammates |
 | Evaluator | [`src/eval_pairs.py`](src/eval_pairs.py), [`src/score.py`](src/score.py) | Parses free text into (colour, piece) pairs and computes P/R/F1, exact match and hallucination rate |
+| Train-only augmentation | [`src/finetune/augment.py`](src/finetune/augment.py) | 25 viewpoint / photometric variants per training image, labels unchanged |
+| LoRA / QLoRA fine-tuning | [`src/finetune/train_lora.py`](src/finetune/train_lora.py) | `--mode lora / qlora` toggles only the backbone precision; answer-only loss; best checkpoint chosen by val loss; logs train time and peak memory |
+| Post-training evaluation | [`src/finetune/predict.py`](src/finetune/predict.py), [`src/finetune/common.py`](src/finetune/common.py) | Same inference and scoring for zero-shot and adapted models; Counter-based, so duplicate pieces are counted |
+
+## Fine-tuning pipeline
+
+```
+147 source images ──source-level split──▶ train 90 / val 18 / test 30 / external 9
+        train 90 ──augment.py──▶ 2,340 records (original + 25 variants)
+        train_lora.py --mode {lora | qlora}
+          · frozen vision tower, projector and LLM; LoRA on LLM q/k/v/o only (r=8, α=16)
+          · trainable params: 8.39M (7B) / 13.1M (13B), about 0.1% of the model
+          · 3 epochs, lr 2e-4, effective batch 4, cosine, 3% warm-up, gradient checkpointing
+          · eval on val every epoch, keep the lowest-val-loss checkpoint
+        predict.py ──▶ greedy decoding on test 30 ──▶ P / R / F1 / exact match / hallucination
+```
+
+Pitfalls worth knowing:
+- **Scope the LoRA targets to `language_model`.** The CLIP vision tower also has `q_proj / k_proj / v_proj`; without the scope the adapter silently spreads into it and the trainable-parameter count no longer matches.
+- **Use an answer-only loss.** The 576 image tokens plus the instruction dominate each sequence; without masking, most of the gradient is spent on reproducing the prompt.
+- **Select checkpoints on val.** 7B QLoRA peaked after epoch 1 while 13B QLoRA peaked at epoch 3.
 
 Early finding: on 36 single-piece images, vanilla LLaVA-7B scored **13.9%**, below the 6-class chance level of about 17%. It answered almost only `king` or `pawn` (7 of 8 rooks were called kings). This finding set the team's fine-tuning direction. See [`results/baseline_7b_zero_shot.md`](results/baseline_7b_zero_shot.md).
 
@@ -61,7 +83,18 @@ pip install -r requirements.txt
 python src/download_chess.py && python src/make_split.py
 python src/run_baseline.py && python src/score.py
 python src/eval_pairs.py results.json
+
+# Fine-tuning (CUDA GPU; 13B LoRA ≈ 26 GB, QLoRA ≈ 9 GB)
+cd src/finetune
+python augment.py --manifest ../../data/train.json --image-root ../../data --out-dir ../../data/train_aug
+python train_lora.py --model llava-hf/llava-1.5-13b-hf --mode qlora \
+    --train ../../data/train_aug/train_aug.json --val ../../data/val.json \
+    --image-root ../../data --out ../../runs/qlora_13b
+python predict.py --model llava-hf/llava-1.5-13b-hf --adapter ../../runs/qlora_13b/best_adapter \
+    --load-4bit --test ../../data/test.json --image-root ../../data --out ../../runs/qlora_13b
 ```
+
+Manifest format: `[{"id": "t001", "image": "train/t001.jpg", "labels": "white pawn, black queen"}]`
 
 ## Limitations
 
