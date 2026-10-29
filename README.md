@@ -69,11 +69,6 @@
         predict.py ──▶ test 30 上贪心解码 ──▶ P / R / F1 / 整图全对率 / 幻觉率
 ```
 
-几个容易踩的坑：
-- **LoRA 的目标模块要限定在 `language_model` 里**。CLIP 视觉塔里也有 `q_proj / k_proj / v_proj`，不加限定会连视觉塔一起挂上 LoRA，可训练参数量就对不上了。
-- **只对回答算 loss**。图像的 576 个 token 加上指令占了序列的绝大部分，不 mask 掉的话，模型会把大部分算力花在"复述提问"上。
-- **选点看 val，不盲用最后一个 epoch**。实验里 7B QLoRA 在第 1 个 epoch 就到了最优，13B QLoRA 在第 3 个 epoch 才到，过拟合的节奏不一样。
-
 ### 早期发现：原版模型几乎不认识棋子
 
 在第一阶段的 36 张单棋子图上，原版 LLaVA-7B 准确率只有 **13.9%**（6 类随机猜约 17%），回答几乎只有 `king` 和 `pawn`，8 个车里有 7 个被认成王。详见 [`results/baseline_7b_zero_shot.md`](results/baseline_7b_zero_shot.md)。正是这个结果让团队确定了"必须做领域微调"的方向。
